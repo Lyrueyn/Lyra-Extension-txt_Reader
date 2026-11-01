@@ -1,0 +1,6 @@
+拖放路径样张 DRAG-DROP
+
+这一份文字只用于验证拖放打开 TXT 的路径。
+
+如果正文里能看到 DRAG-DROP，说明 File 对象从 DataTransfer 进入了阅读器。
+

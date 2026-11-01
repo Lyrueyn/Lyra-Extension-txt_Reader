@@ -1,0 +1,191 @@
+{
+  "startedAt": "2026-10-31T01:36:01.036Z",
+  "finishedAt": "2026-10-31T01:36:07.390Z",
+  "environment": {
+    "node": "v24.18.0",
+    "platform": "win32",
+    "edgePath": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "edgeVersion": "156.0.4314.42",
+    "playwrightModule": "C:\\Users\\Administrator\\deepseek-harness\\node_modules\\.pnpm\\playwright@1.61.1\\node_modules\\playwright",
+    "url": "http://127.0.0.1:51948/index.html",
+    "viewport": "1440x900",
+    "mode": "Microsoft Edge via Playwright, headless=true",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0"
+  },
+  "tests": [
+    {
+      "name": "初始空状态与编码控件",
+      "status": "passed",
+      "details": "空状态、标题、进度、禁用状态正确",
+      "screenshot": "",
+      "durationMs": 458
+    },
+    {
+      "name": "扩展清单字段符合约定",
+      "status": "passed",
+      "details": "id/name/version/entry/fileTypes/enabled 均符合约定",
+      "screenshot": "",
+      "durationMs": 1
+    },
+    {
+      "name": "文件选择按钮打开 UTF-8 中文并显示段落",
+      "status": "passed",
+      "details": "文件选择器 → FileReader → UTF-8 解码 → 多段渲染成功",
+      "screenshot": "",
+      "durationMs": 360
+    },
+    {
+      "name": "UTF-8 BOM 自动识别并去除 BOM",
+      "status": "passed",
+      "details": "UTF-8 BOM 被识别并从正文剥离",
+      "screenshot": "",
+      "durationMs": 275
+    },
+    {
+      "name": "GB18030 自动识别",
+      "status": "passed",
+      "details": "自动检测为 GB18030/GBK，中文显示正常",
+      "screenshot": "",
+      "durationMs": 274
+    },
+    {
+      "name": "编码手动覆盖：UTF-8 失败提示后恢复 GB18030",
+      "status": "passed",
+      "details": "错误提示明确；回退到 GB18030 后正文恢复并标记手动编码",
+      "screenshot": "",
+      "durationMs": 24
+    },
+    {
+      "name": "UTF-16LE BOM 自动识别",
+      "status": "passed",
+      "details": "BOM 识别为 UTF-16LE，中文显示正常",
+      "screenshot": "",
+      "durationMs": 274
+    },
+    {
+      "name": "UTF-16BE BOM 自动识别（附测）",
+      "status": "passed",
+      "details": "BOM 识别为 UTF-16BE，中文显示正常",
+      "screenshot": "",
+      "durationMs": 273
+    },
+    {
+      "name": "二进制内容被拦截且页面保持可用",
+      "status": "passed",
+      "details": "PNG 签名被识别为二进制，提示清楚且未崩溃",
+      "screenshot": "",
+      "durationMs": 439
+    },
+    {
+      "name": "空 TXT 被拦截且提示可读",
+      "status": "passed",
+      "details": "空文件给出明确提示，未崩溃",
+      "screenshot": "",
+      "durationMs": 363
+    },
+    {
+      "name": "拖放路径：DataTransfer 中的 TXT 可打开",
+      "status": "passed",
+      "details": "页面内构造 DataTransfer + File 触发 drop 路径成功（非操作系统原生鼠标拖拽）",
+      "screenshot": "",
+      "durationMs": 276
+    },
+    {
+      "name": "阅读设置：字号、行距、宽度、深浅主题、减少动画、页码开关",
+      "status": "passed",
+      "details": "字号 30px、行距 2.3、宽 1100px、浅色主题、减少动画、页码开关与 Esc 关闭均通过",
+      "screenshot": "",
+      "durationMs": 934
+    },
+    {
+      "name": "键盘滚动与输入控件焦点不抢键",
+      "status": "passed",
+      "details": "PageDown/PageUp/Space/ArrowDown 均生效；range 获得焦点时 PageDown 仍滚动正文；Esc 生效",
+      "screenshot": "",
+      "durationMs": 330
+    },
+    {
+      "name": "阅读位置按文件名+大小+时间保存并在重选后恢复",
+      "status": "passed",
+      "details": "位置键含文件名/大小/时间；保存 0.450，恢复 0.450；字符偏移 316；回到开头有效",
+      "screenshot": "",
+      "durationMs": 1340
+    },
+    {
+      "name": "按钮 Tab 焦点顺序",
+      "status": "passed",
+      "details": "restartBtn → settingsBtn → openBtn 可通过 Tab 到达",
+      "screenshot": "",
+      "durationMs": 7
+    },
+    {
+      "name": "file:// 直接打开原型并读取 TXT",
+      "status": "passed",
+      "details": "file:///D:/Temp/Lyra-Extension-Txt/index.html 可直接加载，并成功打开 UTF-8 TXT",
+      "screenshot": "",
+      "durationMs": 194
+    },
+    {
+      "name": "无页面异常或控制台 error",
+      "status": "passed",
+      "details": "0 个 uncaught pageerror、0 个 console.error",
+      "screenshot": "",
+      "durationMs": 0
+    }
+  ],
+  "screenshots": [
+    "tests/evidence/01-empty-state.png",
+    "tests/evidence/02-utf8-reader.png",
+    "tests/evidence/03-binary-error.png",
+    "tests/evidence/04-light-theme-settings.png",
+    "tests/evidence/05-light-reader.png",
+    "tests/evidence/06-file-url.png"
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "fixtures": [
+    {
+      "name": "utf8-cn.txt",
+      "bytes": 2238,
+      "lastModified": 1793410277727
+    },
+    {
+      "name": "utf8-bom.txt",
+      "bytes": 2243,
+      "lastModified": 1793410277728
+    },
+    {
+      "name": "gb18030-cn.txt",
+      "bytes": 1579,
+      "lastModified": 1793410277732
+    },
+    {
+      "name": "utf16le-bom.txt",
+      "bytes": 1832,
+      "lastModified": 1793410277734
+    },
+    {
+      "name": "utf16be-bom.txt",
+      "bytes": 1832,
+      "lastModified": 1793410277735
+    },
+    {
+      "name": "drop-sample.txt",
+      "bytes": 186,
+      "lastModified": 1793410277735
+    },
+    {
+      "name": "binary-sample.txt",
+      "bytes": 67,
+      "lastModified": 1793410277736
+    },
+    {
+      "name": "empty.txt",
+      "bytes": 0,
+      "lastModified": 1793410277736
+    }
+  ],
+  "passed": 17,
+  "failed": 0,
+  "ok": true
+}

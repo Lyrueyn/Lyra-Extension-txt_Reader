@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="color-scheme" content="dark light"/>
+<title>璃鸢镜 · TXT 阅读器</title>
+<link rel="icon" href="data:,"/>
+<link rel="stylesheet" href="reader.css?v=0.1.1"/>
+</head>
+<body>
+<div id="app">
+  <header id="toolbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">TXT</span>
+      <span class="brand-copy">
+        <strong>TXT 阅读器</strong>
+        <small>璃鸢镜 · 网页扩展</small>
+      </span>
+    </div>
+
+    <div id="docTitle" title="尚未打开文件">尚未打开文件</div>
+
+    <div class="toolbar-actions">
+      <label class="encoding-field" for="encodingSelect" title="手动覆盖文本编码">
+        <span>编码</span>
+        <select id="encodingSelect" aria-label="文本编码" disabled>
+          <option value="auto">自动识别</option>
+          <option value="utf-8">UTF-8</option>
+          <option value="gb18030">GB18030 / GBK</option>
+          <option value="utf-16le">UTF-16LE</option>
+          <option value="utf-16be">UTF-16BE</option>
+        </select>
+      </label>
+      <button id="restartBtn" type="button" title="回到文件开头" disabled>回到开头</button>
+      <button id="settingsBtn" type="button" class="ghost" aria-expanded="false" aria-controls="settingsPanel">阅读设置</button>
+      <button id="openBtn" type="button" class="primary">打开 TXT</button>
+    </div>
+    <input id="fileInput" type="file" accept=".txt,text/plain" hidden/>
+  </header>
+
+  <div id="progressRail" aria-hidden="true"><span id="progressFill"></span></div>
+
+  <div id="errorBanner" class="error-banner" role="alert" hidden>
+    <span id="errorText"></span>
+    <button id="errorClose" type="button" class="error-close" aria-label="关闭错误提示">×</button>
+  </div>
+
+  <div id="body">
+    <main id="main">
+      <section id="emptyState" class="empty-state" aria-labelledby="emptyTitle">
+        <div id="dropZone" class="empty-card">
+          <div class="empty-icon" aria-hidden="true">TXT</div>
+          <h1 id="emptyTitle">把 TXT 拖到这里</h1>
+          <p class="empty-lead">或点击下方按钮选择本地文件。全部在浏览器里读取，不会上传。</p>
+          <button id="emptyOpenBtn" type="button" class="primary large">选择 TXT 文件</button>
+          <p class="empty-note">支持 UTF-8（含 BOM）、UTF-16LE/BE BOM、GB18030/GBK；<br/>也可以在顶部随时切换编码。</p>
+        </div>
+      </section>
+
+      <section id="readerView" class="reader-view" aria-label="TXT 阅读区域" hidden>
+        <div id="readerScroller" class="reader-scroller" tabindex="0" aria-label="TXT 正文，可用 PageUp、PageDown、空格或方向键滚动">
+          <article id="readingPage" class="reading-page">
+            <header class="reader-meta">
+              <div class="reader-title-wrap">
+                <h1 id="readingTitle">尚未打开文件</h1>
+                <p id="fileMeta" class="file-meta"></p>
+              </div>
+              <span id="encodingChip" class="chip" title="当前正文编码">—</span>
+            </header>
+            <div id="readerContent" class="reader-content"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <aside id="settingsPanel" class="settings-panel" aria-labelledby="settingsTitle" aria-hidden="true" hidden>
+      <header class="panel-head">
+        <h2 id="settingsTitle">阅读设置</h2>
+        <button id="settingsClose" type="button" class="icon-button" aria-label="关闭阅读设置">×</button>
+      </header>
+      <div class="settings-body">
+        <div class="setting-row">
+          <label for="fontRange">字号 <small>14–32 px</small></label>
+          <span class="range-control">
+            <input id="fontRange" type="range" min="14" max="32" step="1" value="20"/>
+            <output id="fontValue" for="fontRange">20</output>
+          </span>
+        </div>
+        <div class="setting-row">
+          <label for="lineRange">行距 <small>1.4–2.6</small></label>
+          <span class="range-control">
+            <input id="lineRange" type="range" min="1.4" max="2.6" step="0.05" value="1.95"/>
+            <output id="lineValue" for="lineRange">1.95</output>
+          </span>
+        </div>
+        <div class="setting-row">
+          <label for="widthRange">内容宽度 <small>600–1400 px</small></label>
+          <span class="range-control">
+            <input id="widthRange" type="range" min="600" max="1400" step="20" value="860"/>
+            <output id="widthValue" for="widthRange">860</output>
+          </span>
+        </div>
+
+        <div class="settings-group">
+          <h3>主题</h3>
+          <div class="theme-picker" role="group" aria-label="阅读主题">
+            <button id="themeLight" type="button" data-theme-choice="light">浅色</button>
+            <button id="themeDark" type="button" data-theme-choice="dark" class="active" aria-pressed="true">深色</button>
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <label class="setting-row switch-row" for="motionToggle">
+            <span>减少动画 <small>关闭面板、滚动与提示的过渡</small></span>
+            <input id="motionToggle" type="checkbox"/>
+          </label>
+          <label class="setting-row switch-row" for="pageEstimateToggle">
+            <span>显示页码估算 <small>按窗口高度估算，不强制分页</small></span>
+            <input id="pageEstimateToggle" type="checkbox" checked/>
+          </label>
+        </div>
+
+        <div class="shortcut-card">
+          <h3>键盘</h3>
+          <p><kbd>PageUp</kbd> / <kbd>PageDown</kbd> 翻屏 · <kbd>空格</kbd> / <kbd>方向键</kbd> 滚动 · <kbd>Esc</kbd> 关闭本面板</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer id="statusbar">
+    <span id="statusText" class="status-text" aria-live="polite">打开一个 .txt 开始阅读</span>
+    <span id="saveStateText" class="save-state" aria-live="polite"></span>
+    <span class="footer-spacer"></span>
+    <span id="pageText" class="page-text"></span>
+    <span id="progressText" class="progress-text">0%</span>
+  </footer>
+</div>
+
+<div id="dropOverlay" class="drop-overlay" hidden aria-hidden="true">
+  <div class="drop-overlay-inner">
+    <div class="drop-icon" aria-hidden="true">↓</div>
+    <strong>释放以打开 TXT</strong>
+    <span>仅支持 .txt 纯文本文件</span>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="reader.js?v=0.1.1" defer></script>
+</body>
+</html>
