@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN" data-theme="dark">
 <head>
 <meta charset="utf-8"/>
@@ -6,7 +6,7 @@
 <meta name="color-scheme" content="dark light"/>
 <title>璃鸢镜 · TXT 阅读器</title>
 <link rel="icon" href="data:,"/>
-<link rel="stylesheet" href="reader.css?v=0.1.1"/>
+<link rel="stylesheet" href="reader.css?v=0.1.2"/>
 </head>
 <body>
 <div id="app">
@@ -119,6 +119,10 @@
             <span>显示页码估算 <small>按窗口高度估算，不强制分页</small></span>
             <input id="pageEstimateToggle" type="checkbox" checked/>
           </label>
+          <label class="setting-row switch-row" for="selectToggle">
+            <span>允许选中文字 <small>关闭后正文不能被鼠标选中</small></span>
+            <input id="selectToggle" type="checkbox" checked/>
+          </label>
         </div>
 
         <div class="shortcut-card">
@@ -148,6 +152,7 @@
 
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="reader.js?v=0.1.1" defer></script>
+<script src="reader.js?v=0.1.2" defer></script>
 </body>
 </html>
+

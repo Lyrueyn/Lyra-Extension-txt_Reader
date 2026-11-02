@@ -41,7 +41,8 @@
     contentWidth: 860,
     theme: "dark",
     reduceMotion: systemReduceMotion,
-    showPageEstimate: true
+    showPageEstimate: true,
+    selectable: true
   };
 
   class TextFileError extends Error {
@@ -82,6 +83,7 @@
     themeDark: $("themeDark"),
     motionToggle: $("motionToggle"),
     pageEstimateToggle: $("pageEstimateToggle"),
+    selectToggle: $("selectToggle"),
     errorBanner: $("errorBanner"),
     errorText: $("errorText"),
     errorClose: $("errorClose"),
@@ -199,6 +201,7 @@
       if (saved.theme === "light" || saved.theme === "dark") prefs.theme = saved.theme;
       if (typeof saved.reduceMotion === "boolean") prefs.reduceMotion = saved.reduceMotion;
       if (typeof saved.showPageEstimate === "boolean") prefs.showPageEstimate = saved.showPageEstimate;
+      if (typeof saved.selectable === "boolean") prefs.selectable = saved.selectable;
     } catch {
       /* 损坏的偏好不阻塞阅读，静默回退默认值 */
     }
@@ -228,6 +231,8 @@
 
     el.motionToggle.checked = !!prefs.reduceMotion;
     el.pageEstimateToggle.checked = !!prefs.showPageEstimate;
+    el.selectToggle.checked = prefs.selectable !== false;
+    html.classList.toggle("no-select", prefs.selectable === false);
 
     const themeButtons = [
       [el.themeLight, "light"],
@@ -261,6 +266,12 @@
     persistPrefs();
     applyPrefs();
     updatePageEstimate();
+  }
+
+  function setSelectablePreference(enabled) {
+    state.prefs.selectable = !!enabled;
+    persistPrefs();
+    applyPrefs();
   }
 
   function updateLayoutPreference(key, value) {
@@ -1175,6 +1186,7 @@
     el.themeDark.addEventListener("click", () => applyTheme("dark"));
     el.motionToggle.addEventListener("change", () => setMotionPreference(el.motionToggle.checked));
     el.pageEstimateToggle.addEventListener("change", () => setPageEstimatePreference(el.pageEstimateToggle.checked));
+    el.selectToggle.addEventListener("change", () => setSelectablePreference(el.selectToggle.checked));
 
     el.readerScroller.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("keydown", handleKeydown);

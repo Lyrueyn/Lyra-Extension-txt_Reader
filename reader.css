@@ -359,6 +359,9 @@ body.dragging .empty-card {
   hanging-punctuation: allow-end;
 }
 .reader-content p:last-child { margin-bottom: 0; }
+html.no-select .reader-content,
+html.no-select .reader-content * { user-select: none !important; -webkit-user-select: none !important; }
+html.no-select .reader-content { cursor: default; }
 
 /* ---------------- 设置面板 ---------------- */
 .settings-panel {

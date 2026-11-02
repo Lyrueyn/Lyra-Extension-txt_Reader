@@ -1,9 +1,10 @@
-{
+﻿{
   "id": "txt",
   "name": "TXT 阅读器",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "entry": "index.html",
   "description": "璃鸢镜 TXT 阅读器：本地纯文本阅读、自动/手动编码、字号行距宽度、深浅主题与阅读位置恢复。",
   "fileTypes": [".txt"],
   "enabled": true
 }
+
